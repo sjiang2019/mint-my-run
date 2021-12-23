@@ -16,9 +16,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Map } from "leaflet";
 
-import { ActivityData, ActivityMetadata } from "../constants/models";
+import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
 import MapView from "./MapView";
-import { EditMetadataModal } from "./EditMetadataModal";
+import { EditNameDescriptionModal } from "./EditNameDescriptionModal";
 import MetadataCard from "./MetadataCard";
 
 function EditMetadataButton(props: { onClick: () => void }): JSX.Element {
@@ -47,19 +47,25 @@ function EditMetadataButton(props: { onClick: () => void }): JSX.Element {
 interface MintActivityListItemProps {
   activityData: ActivityData;
   onCreateMap: (map: Map) => void;
-  onChangeActivityMetadata: (metadata: ActivityMetadata) => void;
+  makeActivityMetadata: (activity: Activity) => ActivityMetadata;
+  onChangeActivityData: (updates: Partial<Activity>) => void;
   onRemove: () => void;
 }
 
 export default function MintActivityListItem(
   props: MintActivityListItemProps
 ): JSX.Element {
-  const { activityData, onCreateMap, onChangeActivityMetadata, onRemove } =
-    props;
-  const { activity, metadata, ...rest } = activityData;
+  const {
+    activityData,
+    onCreateMap,
+    makeActivityMetadata,
+    onChangeActivityData,
+    onRemove,
+  } = props;
+  const { activity, ...rest } = activityData;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleSaveModal = (name: string, description: string) => {
-    onChangeActivityMetadata({ ...metadata, name, description });
+    onChangeActivityData({ ...activity, name, description });
     setIsModalOpen(false);
   };
   return (
@@ -75,7 +81,7 @@ export default function MintActivityListItem(
         >
           <DeleteIcon fontSize="small" />
         </IconButton>
-        <Typography sx={{ paddingTop: "7px" }}>{metadata.name}</Typography>
+        <Typography sx={{ paddingTop: "7px" }}>{activity.name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <TableContainer>
@@ -92,9 +98,9 @@ export default function MintActivityListItem(
                 <TableCell align="left">
                   <EditMetadataButton onClick={() => setIsModalOpen(true)} />
                 </TableCell>
-                <EditMetadataModal
-                  initialName={metadata.name}
-                  initialDescription={metadata.description ?? ""}
+                <EditNameDescriptionModal
+                  initialName={activity.name}
+                  initialDescription={activity.description ?? ""}
                   isOpen={isModalOpen}
                   onClose={() => setIsModalOpen(false)}
                   onSave={handleSaveModal}
@@ -113,7 +119,13 @@ export default function MintActivityListItem(
                   />
                 </TableCell>
                 <TableCell align="left">
-                  <MetadataCard metadata={JSON.stringify(metadata, null, 2)} />
+                  <MetadataCard
+                    metadata={JSON.stringify(
+                      makeActivityMetadata(activity),
+                      null,
+                      2
+                    )}
+                  />
                 </TableCell>
               </TableRow>
             </TableBody>

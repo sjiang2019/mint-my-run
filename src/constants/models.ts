@@ -3,6 +3,7 @@ import { Map } from "leaflet";
 export interface Activity {
   id: number;
   name: string;
+  description?: string;
   date: string;
   maxSpeed: number;
   duration: number;
@@ -31,7 +32,7 @@ export interface ActivityMetadata {
 export interface ActivityData {
   activity: Activity;
   map: Map | null;
-  metadata: ActivityMetadata;
+  metadata?: ActivityMetadata;
 }
 
 interface ReadableMeasurement {
@@ -41,6 +42,7 @@ interface ReadableMeasurement {
 
 export interface ReadableActivity {
   name: string;
+  description?: string;
   date: string;
   type: string;
   duration: string;

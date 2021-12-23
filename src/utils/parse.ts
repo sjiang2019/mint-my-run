@@ -69,8 +69,7 @@ export function transformActivityImperial(
   activity: Activity
 ): ReadableActivity {
   return {
-    name: activity.name,
-    type: activity.type,
+    ...activity,
     date: dateToReadable(activity.date),
     duration: secondsToReadable(activity.duration),
     distance: { value: metersToMiles(activity.distance), unit: "miles" },
@@ -91,8 +90,7 @@ export function transformActivityImperial(
 
 export function transformActivityMetric(activity: Activity): ReadableActivity {
   return {
-    name: activity.name,
-    type: activity.type,
+    ...activity,
     date: dateToReadable(activity.date),
     duration: secondsToReadable(activity.duration),
     distance: { value: metersToKm(activity.distance), unit: "km" },
@@ -109,12 +107,11 @@ export function transformActivityMetric(activity: Activity): ReadableActivity {
 }
 
 export function makeActivityMetadata(
-  readableActivity: ReadableActivity,
-  description?: string
+  readableActivity: ReadableActivity
 ): ActivityMetadata {
   return {
     name: readableActivity.name,
-    description: description,
+    description: readableActivity.description,
     attributes: [
       {
         display_type: "string",

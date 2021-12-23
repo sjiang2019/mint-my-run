@@ -9,18 +9,22 @@ import {
   REACT_APP_PINATA_API_KEY,
   REACT_APP_PINATA_API_SECRET,
 } from "../constants/constants";
-import { ActivityData, ActivityMetadata } from "../constants/models";
+import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
 import { makeIPFSUrl } from "./utils";
 
 export function uploadActivityDataToIPFS(
-  activitiesData: Array<ActivityData>
+  activitiesData: Array<ActivityData>,
+  getActivityMetadata: (activity: Activity) => ActivityMetadata
 ): void {
   activitiesData.forEach(async (data: ActivityData) => {
     const fileBlob = (await new SimpleMapScreenshoter({ hidden: true })
       .addTo(data.map as Map)
       .takeScreen("blob")) as Blob;
-    const cid = await pinFileToIPFS(fileBlob, data.metadata.name);
-    await pinJSONToIPFS({ ...data.metadata, image: makeIPFSUrl(cid) });
+    const cid = await pinFileToIPFS(fileBlob, data.activity.name);
+    await pinJSONToIPFS({
+      ...getActivityMetadata(data.activity),
+      image: makeIPFSUrl(cid),
+    });
   });
 }
 

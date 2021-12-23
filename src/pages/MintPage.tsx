@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import { useLocation } from "react-router";
 import { Map } from "leaflet";
 
-import { ActivityData, ActivityMetadata } from "../constants/models";
+import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
 import { NAVY_BLUE, OFF_WHITE } from "../constants/styles";
 import { Button } from "../components/base/Button";
 import { useToggleMeasurement } from "../hooks/useToggleMeasurement";
@@ -11,13 +11,14 @@ import MintActivityListItem from "../components/MintActivityListItem";
 import MeasurementToggle from "../components/base/MeasurementToggle";
 import { UseUpdateActivitiesData } from "../hooks/useUpdateActivitiesData";
 import { uploadActivityDataToIPFS } from "../utils/ipfs";
+import { makeActivityMetadata } from "../utils/parse";
 
 export default function MintPage(): JSX.Element {
   const { activities, initialMeasurementSystem } = useLocation().state;
   const [measurementSystem, onChangeMeasureSystem, makeReadableActivity] =
     useToggleMeasurement(initialMeasurementSystem);
-  const [activitiesData, removeActivityById, addMapById, updateMetadataById] =
-    UseUpdateActivitiesData(activities, makeReadableActivity);
+  const [activitiesData, removeActivityById, addMapById, updateActivityById] =
+    UseUpdateActivitiesData(activities);
 
   const hasFullyLoadedMaps = activitiesData.every((data) => data.map != null);
   return (
@@ -42,7 +43,9 @@ export default function MintPage(): JSX.Element {
             disabled={!hasFullyLoadedMaps}
             onClick={() => {
               if (hasFullyLoadedMaps) {
-                uploadActivityDataToIPFS(activitiesData);
+                uploadActivityDataToIPFS(activitiesData, (activity: Activity) =>
+                  makeActivityMetadata(makeReadableActivity(activity))
+                );
               }
               // await startMintFlow();
               // await requestAccount();
@@ -59,8 +62,11 @@ export default function MintPage(): JSX.Element {
                 <MintActivityListItem
                   activityData={data}
                   onCreateMap={(map: Map) => addMapById(activityId, map)}
-                  onChangeActivityMetadata={(metadata: ActivityMetadata) => {
-                    updateMetadataById(activityId, metadata);
+                  makeActivityMetadata={(activity: Activity) =>
+                    makeActivityMetadata(makeReadableActivity(activity))
+                  }
+                  onChangeActivityData={(updates: Partial<Activity>) => {
+                    updateActivityById(activityId, updates);
                   }}
                   onRemove={() => removeActivityById(activityId)}
                 />
