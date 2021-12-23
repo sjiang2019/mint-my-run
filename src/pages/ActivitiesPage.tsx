@@ -114,6 +114,7 @@ const ActivitiesPage = ({ user }: UserRoutesProps) => {
               handleClose={() => setIsDrawerOpen(false)}
               selectedActivities={selectedActivities}
               makeReadableActivity={makeReadableActivity}
+              measurementSystem={measurementSystem}
               removeSelectedActivity={removeActivity}
             />
           </div>
