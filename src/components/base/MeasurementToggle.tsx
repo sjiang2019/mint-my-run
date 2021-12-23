@@ -1,5 +1,5 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { Measurement } from "../../constants/constants";
+import { Measurement } from "../../constants/models";
 
 export default function MeasurementToggle(props: {
   measurementSystem: Measurement;

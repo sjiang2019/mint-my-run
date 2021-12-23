@@ -12,11 +12,11 @@ import ListItemText from "@mui/material/ListItemText";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useMemo } from "react";
 
-import { Activity, ReadableActivity } from "../constants/models";
+import { Activity, Measurement, ReadableActivity } from "../constants/models";
 import { Button } from "./base/Button";
 import { useNavigate } from "react-router-dom";
 import { WHITE } from "../constants/styles";
-import { Measurement, MINT_PAGE_ROUTE } from "../constants/constants";
+import { MINT_PAGE_ROUTE } from "../constants/constants";
 import { Typography } from "@mui/material";
 
 const drawerWidth = 240;

@@ -2,11 +2,11 @@ import { Grid } from "@mui/material";
 import { useLocation } from "react-router";
 import { Map } from "leaflet";
 
-import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
+import { Activity, ActivityData } from "../constants/models";
 import { NAVY_BLUE, OFF_WHITE } from "../constants/styles";
 import { Button } from "../components/base/Button";
 import { useToggleMeasurement } from "../hooks/useToggleMeasurement";
-import { requestAccount, startMintFlow } from "../utils/mint";
+import { mintNFTs } from "../utils/mint";
 import MintActivityListItem from "../components/MintActivityListItem";
 import MeasurementToggle from "../components/base/MeasurementToggle";
 import { UseUpdateActivitiesData } from "../hooks/useUpdateActivitiesData";
@@ -41,11 +41,14 @@ export default function MintPage(): JSX.Element {
               color: OFF_WHITE,
             }}
             disabled={!hasFullyLoadedMaps}
-            onClick={() => {
+            onClick={async () => {
               if (hasFullyLoadedMaps) {
-                uploadActivityDataToIPFS(activitiesData, (activity: Activity) =>
-                  makeActivityMetadata(makeReadableActivity(activity))
+                const tokenUris = await uploadActivityDataToIPFS(
+                  activitiesData,
+                  (activity: Activity) =>
+                    makeActivityMetadata(makeReadableActivity(activity))
                 );
+                await mintNFTs(tokenUris);
               }
               // await startMintFlow();
               // await requestAccount();

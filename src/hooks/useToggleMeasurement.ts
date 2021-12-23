@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Measurement } from "../constants/constants";
 
-import { Activity, ReadableActivity } from "../constants/models";
+import { Activity, Measurement, ReadableActivity } from "../constants/models";
 import {
   transformActivityImperial,
   transformActivityMetric,

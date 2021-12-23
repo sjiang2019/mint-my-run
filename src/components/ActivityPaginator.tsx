@@ -1,8 +1,13 @@
 import { Grid } from "@mui/material";
 import { StyleSheet, css } from "aphrodite";
 import { useState } from "react";
-import { DisplayType, Measurement } from "../constants/constants";
-import { Activity, ReadableActivity, User } from "../constants/models";
+import {
+  Activity,
+  DisplayType,
+  Measurement,
+  ReadableActivity,
+  User,
+} from "../constants/models";
 import { useActivitiesPagination } from "../hooks/useActivitiesPagination";
 import ActivityListing from "./ActivityListing";
 import { Button } from "./base/Button";

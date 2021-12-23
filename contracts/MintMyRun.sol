@@ -39,7 +39,7 @@ contract MintMyRun is ERC721, ReentrancyGuard, ERC721URIStorage, Ownable {
       saleIsActive = saleIsActive_;
     }
 
-    function withdraw() public nonReentrant {
+    function withdraw() public onlyOwner nonReentrant {
       uint256 balance = address(this).balance;
 
       Address.sendValue(payable(owner()), balance);

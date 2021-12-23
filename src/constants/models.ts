@@ -52,7 +52,6 @@ export interface ReadableActivity {
   totalElevationGain: ReadableMeasurement;
   elevationHigh: ReadableMeasurement;
   elevationLow: ReadableMeasurement;
-  measurementSystem: string;
 }
 
 export interface UserAuth {
@@ -80,4 +79,14 @@ export interface UserStats {
   rideTotal: ActivityTotal;
   runTotal: ActivityTotal;
   swimTotal: ActivityTotal;
+}
+
+export enum Measurement {
+  Metric = "metric",
+  Imperial = "imperial",
+}
+
+export enum DisplayType {
+  List,
+  Gallery,
 }

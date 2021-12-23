@@ -1,4 +1,3 @@
-import { Measurement } from "../constants/constants";
 import {
   Activity,
   ActivityMetadata,
@@ -84,7 +83,6 @@ export function transformActivityImperial(
       unit: "feet",
     },
     elevationLow: { value: metersToFeet(activity.elevationLow), unit: "feet" },
-    measurementSystem: Measurement.Metric,
   };
 }
 
@@ -102,7 +100,6 @@ export function transformActivityMetric(activity: Activity): ReadableActivity {
     },
     elevationHigh: { value: activity.elevationHigh, unit: "meters" },
     elevationLow: { value: activity.elevationLow, unit: "meters" },
-    measurementSystem: Measurement.Imperial,
   };
 }
 
