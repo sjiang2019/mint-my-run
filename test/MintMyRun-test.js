@@ -80,5 +80,11 @@ describe("MintMyRun", function () {
         ethers.utils.formatEther((initialBal - finalBal).toString())
       ).equals("0.5");
     });
+    it("should only let owner withdraw", async function () {
+      await mintMyRun.setSaleIsActive(true);
+      await expect(mintMyRun.connect(addr2).withdraw()).to.be.revertedWith(
+        "Ownable: caller is not the owner"
+      );
+    });
   });
 });

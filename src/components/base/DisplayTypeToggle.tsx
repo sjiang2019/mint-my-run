@@ -1,5 +1,5 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { DisplayType } from "../../constants/constants";
+import { DisplayType } from "../../constants/models";
 
 export default function DisplayTypeToggle(props: {
   displayType: DisplayType;

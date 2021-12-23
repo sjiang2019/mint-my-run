@@ -2,8 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import LazyLoad from "react-lazyload";
 
-import { DisplayType } from "../constants/constants";
-import { Activity, ReadableActivity } from "../constants/models";
+import { Activity, DisplayType, ReadableActivity } from "../constants/models";
 import ActivityListItem from "./ActivityListItem";
 import ActivityCard from "./ActivityCard";
 

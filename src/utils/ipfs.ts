@@ -12,20 +12,24 @@ import {
 import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
 import { makeIPFSUrl } from "./utils";
 
-export function uploadActivityDataToIPFS(
+export async function uploadActivityDataToIPFS(
   activitiesData: Array<ActivityData>,
   getActivityMetadata: (activity: Activity) => ActivityMetadata
-): void {
-  activitiesData.forEach(async (data: ActivityData) => {
-    const fileBlob = (await new SimpleMapScreenshoter({ hidden: true })
-      .addTo(data.map as Map)
-      .takeScreen("blob")) as Blob;
-    const cid = await pinFileToIPFS(fileBlob, data.activity.name);
-    await pinJSONToIPFS({
-      ...getActivityMetadata(data.activity),
-      image: makeIPFSUrl(cid),
-    });
-  });
+): Promise<Array<string>> {
+  const cids = await Promise.all(
+    activitiesData.map(async (data: ActivityData): Promise<string> => {
+      const fileBlob = (await new SimpleMapScreenshoter({ hidden: true })
+        .addTo(data.map as Map)
+        .takeScreen("blob")) as Blob;
+      const fileCid = await pinFileToIPFS(fileBlob, data.activity.name);
+      const jsonCid = await pinJSONToIPFS({
+        ...getActivityMetadata(data.activity),
+        image: makeIPFSUrl(fileCid),
+      });
+      return jsonCid;
+    })
+  );
+  return cids.map((cid) => makeIPFSUrl(cid));
 }
 
 export async function pinFileToIPFS(blob: Blob, name: string): Promise<string> {
@@ -51,17 +55,20 @@ export async function pinFileToIPFS(blob: Blob, name: string): Promise<string> {
   return response.data.IpfsHash;
 }
 
-export async function pinJSONToIPFS(metadata: ActivityMetadata): Promise<void> {
+export async function pinJSONToIPFS(
+  metadata: ActivityMetadata
+): Promise<string> {
   const pinataMetadata = {
     pinataMetadata: {
       name: metadata.name,
     },
     pinataContent: metadata,
   };
-  await axios.post(PIN_JSON_TO_IPFS_API, pinataMetadata, {
+  const response = await axios.post(PIN_JSON_TO_IPFS_API, pinataMetadata, {
     headers: {
       pinata_api_key: REACT_APP_PINATA_API_KEY as string,
       pinata_secret_api_key: REACT_APP_PINATA_API_SECRET as string,
     },
   });
+  return response.data.IpfsHash;
 }
