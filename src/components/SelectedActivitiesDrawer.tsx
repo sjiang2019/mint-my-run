@@ -16,7 +16,7 @@ import { Activity, ReadableActivity } from "../constants/models";
 import { Button } from "./base/Button";
 import { useNavigate } from "react-router-dom";
 import { WHITE } from "../constants/styles";
-import { MINT_PAGE_ROUTE } from "../constants/constants";
+import { Measurement, MINT_PAGE_ROUTE } from "../constants/constants";
 import { Typography } from "@mui/material";
 
 const drawerWidth = 240;
@@ -34,6 +34,7 @@ interface SelectedActivitiesDrawerProps {
   handleClose: () => void;
   selectedActivities: Set<Activity>;
   makeReadableActivity: (activity: Activity) => ReadableActivity;
+  measurementSystem: Measurement;
   removeSelectedActivity: (activity: Activity) => void;
 }
 
@@ -46,6 +47,7 @@ export default function SelectedActivitiesDrawer(
     handleClose,
     selectedActivities,
     makeReadableActivity,
+    measurementSystem,
     removeSelectedActivity,
   } = props;
   const activitiesList = useMemo(() => {
@@ -122,7 +124,10 @@ export default function SelectedActivitiesDrawer(
                 }}
                 onClick={() =>
                   navigate(MINT_PAGE_ROUTE, {
-                    state: selectedActivities,
+                    state: {
+                      activities: selectedActivities,
+                      initialMeasurementSystem: measurementSystem,
+                    },
                   })
                 }
               >

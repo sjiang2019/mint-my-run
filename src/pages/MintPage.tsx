@@ -11,13 +11,13 @@ import MintActivityListItem from "../components/MintActivityListItem";
 import MeasurementToggle from "../components/base/MeasurementToggle";
 import { UseUpdateActivitiesData } from "../hooks/useUpdateActivitiesData";
 import { uploadActivityDataToIPFS } from "../utils/ipfs";
-import { makeIPFSUrl } from "../utils/utils";
 
 export default function MintPage(): JSX.Element {
+  const { activities, initialMeasurementSystem } = useLocation().state;
   const [measurementSystem, onChangeMeasureSystem, makeReadableActivity] =
-    useToggleMeasurement();
+    useToggleMeasurement(initialMeasurementSystem);
   const [activitiesData, removeActivityById, addMapById, updateMetadataById] =
-    UseUpdateActivitiesData(useLocation().state, makeReadableActivity);
+    UseUpdateActivitiesData(activities, makeReadableActivity);
 
   const hasFullyLoadedMaps = activitiesData.every((data) => data.map != null);
   return (

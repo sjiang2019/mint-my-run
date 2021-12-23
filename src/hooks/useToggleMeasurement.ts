@@ -7,13 +7,15 @@ import {
   transformActivityMetric,
 } from "../utils/parse";
 
-export function useToggleMeasurement(): [
+export function useToggleMeasurement(
+  initialMeasurementSystem?: Measurement
+): [
   Measurement,
   (newSystem: Measurement) => void,
   (activity: Activity) => ReadableActivity
 ] {
   const [measurementSystem, setMeasurementSystem] = useState(
-    Measurement.Metric
+    initialMeasurementSystem ?? Measurement.Metric
   );
   const [makeReadableActivity, setMakeReadableActivity] = useState<
     (activity: Activity) => ReadableActivity
