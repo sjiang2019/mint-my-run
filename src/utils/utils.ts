@@ -48,10 +48,14 @@ export function dateToReadable(date: string): string {
   return moment(date).format("MMMM DD, YYYY");
 }
 
-export function lowerFirstLetter(str: string) {
+export function lowerFirstLetter(str: string): string {
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
 
-export function redirectToStravaAuth() {
+export function redirectToStravaAuth(): void {
   window.location.href = STRAVA_AUTH_URL;
+}
+
+export function makeIPFSUrl(ipfsHash: string) {
+  return `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
 }
