@@ -4,7 +4,7 @@ import { OFF_WHITE } from "../constants/styles";
 import { Button } from "./base/Button";
 import { ChangeEvent, useState } from "react";
 
-interface EditMetadataModalProps {
+interface EditNameDescriptionModalProps {
   initialName: string;
   initialDescription: string;
   isOpen: boolean;
@@ -12,7 +12,9 @@ interface EditMetadataModalProps {
   onSave: (name: string, description: string) => void;
 }
 
-export function EditMetadataModal(props: EditMetadataModalProps): JSX.Element {
+export function EditNameDescriptionModal(
+  props: EditNameDescriptionModalProps
+): JSX.Element {
   const handleClose = (event: any, reason: string) => {
     if (reason !== "backdropClick") {
       props.onClose();

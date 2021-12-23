@@ -1,22 +1,15 @@
 import { useState } from "react";
 import { Map } from "leaflet";
 
-import {
-  Activity,
-  ActivityData,
-  ActivityMetadata,
-  ReadableActivity,
-} from "../constants/models";
-import { makeActivityMetadata } from "../utils/parse";
+import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
 
 export function UseUpdateActivitiesData(
-  activities: Set<Activity>,
-  makeReadableActivity: (activity: Activity) => ReadableActivity
+  activities: Set<Activity>
 ): [
   Array<ActivityData>,
   (id: number) => void,
   (id: number, map: Map) => void,
-  (id: number, metadata: ActivityMetadata) => void
+  (id: number, updates: Partial<Activity>) => void
 ] {
   const initialActivitiesData = (Array.from(activities) as Array<Activity>)
     .sort((a, b) => b.id - a.id)
@@ -26,7 +19,6 @@ export function UseUpdateActivitiesData(
         {
           activity: activity,
           map: null,
-          metadata: makeActivityMetadata(makeReadableActivity(activity)),
         },
       ];
     }, []);
@@ -45,12 +37,20 @@ export function UseUpdateActivitiesData(
         data.activity.id === id ? { ...data, map } : data
       )
     );
-  const updateMetadataById = (id: number, metadata: ActivityMetadata): void => {
+  const updateActivityById = (id: number, updates: Partial<Activity>): void => {
     setActivitiesData((prevState: Array<ActivityData>) =>
       prevState.map((data: ActivityData) =>
-        data.activity.id === id ? { ...data, metadata } : data
+        data.activity.id === id
+          ? {
+              ...data,
+              activity: {
+                ...data.activity,
+                ...updates,
+              },
+            }
+          : data
       )
     );
   };
-  return [activitiesData, removeActivityById, addMapById, updateMetadataById];
+  return [activitiesData, removeActivityById, addMapById, updateActivityById];
 }
