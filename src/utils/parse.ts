@@ -113,7 +113,6 @@ export function makeActivityMetadata(
   description?: string
 ): ActivityMetadata {
   return {
-    image: "ipfs url here",
     name: readableActivity.name,
     description: description,
     attributes: [

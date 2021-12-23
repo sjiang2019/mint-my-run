@@ -22,10 +22,10 @@ export interface MetadataAttribute {
 }
 
 export interface ActivityMetadata {
-  image: string;
   name: string;
-  description?: string;
   attributes: Array<MetadataAttribute>;
+  image?: string;
+  description?: string;
 }
 
 export interface ActivityData {

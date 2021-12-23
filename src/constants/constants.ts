@@ -23,6 +23,9 @@ export const QUESTIONS_PAGE_ROUTE = "/#questions";
 export const ABOUT_PAGE_ROUTE = "/#about";
 export const MINT_PAGE_ROUTE = "/mint";
 
+export const PIN_FILE_TO_IPFS_API = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+export const PIN_JSON_TO_IPFS_API = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+
 export enum Measurement {
   Metric = "metric",
   Imperial = "imperial",

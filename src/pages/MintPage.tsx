@@ -1,8 +1,6 @@
 import { Grid } from "@mui/material";
 import { useLocation } from "react-router";
-import { useState } from "react";
 import { Map } from "leaflet";
-import { SimpleMapScreenshoter } from "leaflet-simple-map-screenshoter";
 
 import { ActivityData, ActivityMetadata } from "../constants/models";
 import { NAVY_BLUE, OFF_WHITE } from "../constants/styles";
@@ -12,26 +10,8 @@ import { requestAccount, startMintFlow } from "../utils/mint";
 import MintActivityListItem from "../components/MintActivityListItem";
 import MeasurementToggle from "../components/base/MeasurementToggle";
 import { UseUpdateActivitiesData } from "../hooks/useUpdateActivitiesData";
-import { pinFileToIPFS, pinJSONToIPFS } from "../utils/pin";
-
-function handleClickMint(activitiesData: Array<ActivityData>) {
-  // activitiesData.forEach((data: ActivityData) => {
-  //   new SimpleMapScreenshoter({ hidden: true })
-  //     .addTo(data.map as Map)
-  //     .takeScreen("image", { mimeType: "image/png" })
-  //     .then((imgUrl: any) => {
-  //       pinFileToIPFS(imgUrl, JSON.stringify(data.metadata, null, 2));
-  //     });
-  // });
-  const data = activitiesData[0];
-
-  new SimpleMapScreenshoter({ hidden: true })
-    .addTo(data.map as Map)
-    .takeScreen("image", { mimeType: "image/png" })
-    .then((imgUrl: any) => {
-      pinJSONToIPFS();
-    });
-}
+import { uploadActivityDataToIPFS } from "../utils/ipfs";
+import { makeIPFSUrl } from "../utils/utils";
 
 export default function MintPage(): JSX.Element {
   const [measurementSystem, onChangeMeasureSystem, makeReadableActivity] =
@@ -60,9 +40,9 @@ export default function MintPage(): JSX.Element {
               color: OFF_WHITE,
             }}
             disabled={!hasFullyLoadedMaps}
-            onClick={async () => {
+            onClick={() => {
               if (hasFullyLoadedMaps) {
-                handleClickMint(activitiesData);
+                uploadActivityDataToIPFS(activitiesData);
               }
               // await startMintFlow();
               // await requestAccount();
