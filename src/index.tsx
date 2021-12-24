@@ -8,11 +8,35 @@ import "./index.css";
 import AppRouter from "./router/AppRouter";
 import reportWebVitals from "./reportWebVitals";
 import reducers from "./reducers";
+import { createTheme, ThemeProvider } from "@mui/material";
+
+const THEME = createTheme({
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+  },
+});
 
 ReactDOM.render(
-  <Provider store={createStore(reducers, composeWithDevTools())}>
-    <AppRouter />
-  </Provider>,
+  <ThemeProvider theme={THEME}>
+    <Provider store={createStore(reducers, composeWithDevTools())}>
+      <AppRouter />
+    </Provider>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

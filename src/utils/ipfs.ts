@@ -12,12 +12,17 @@ import {
 import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
 import { makeIPFSUrl } from "./utils";
 
+export interface IPFSHash {
+  fileHash: string;
+  jsonHash: string;
+}
+
 export async function uploadActivityDataToIPFS(
   activitiesData: Array<ActivityData>,
   getActivityMetadata: (activity: Activity) => ActivityMetadata
-): Promise<Array<string>> {
-  const cids = await Promise.all(
-    activitiesData.map(async (data: ActivityData): Promise<string> => {
+): Promise<Array<IPFSHash>> {
+  return await Promise.all(
+    activitiesData.map(async (data: ActivityData): Promise<IPFSHash> => {
       const fileBlob = (await new SimpleMapScreenshoter({ hidden: true })
         .addTo(data.map as Map)
         .takeScreen("blob")) as Blob;
@@ -26,10 +31,9 @@ export async function uploadActivityDataToIPFS(
         ...getActivityMetadata(data.activity),
         image: makeIPFSUrl(fileCid),
       });
-      return jsonCid;
+      return { fileHash: fileCid, jsonHash: jsonCid };
     })
   );
-  return cids.map((cid) => makeIPFSUrl(cid));
 }
 
 export async function pinFileToIPFS(blob: Blob, name: string): Promise<string> {
@@ -71,4 +75,14 @@ export async function pinJSONToIPFS(
     },
   });
   return response.data.IpfsHash;
+}
+
+export async function unpinFileToIPFS(hash: string): Promise<void> {
+  const url = `https://api.pinata.cloud/pinning/unpin/${hash}`;
+  await axios.delete(url, {
+    headers: {
+      pinata_api_key: REACT_APP_PINATA_API_KEY as string,
+      pinata_secret_api_key: REACT_APP_PINATA_API_SECRET as string,
+    },
+  });
 }

@@ -9,7 +9,7 @@ import {
 import MintMyRun from "../constants/contractAbis/MintMyRun.json";
 import { ActivityMetadata } from "../constants/models";
 
-export async function mintNFTs(tokenUris: Array<string>): Promise<void> {
+export async function mintNFTs(tokenUris: Array<string>): Promise<boolean> {
   try {
     // @ts-expect-error
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -32,6 +32,7 @@ export async function mintNFTs(tokenUris: Array<string>): Promise<void> {
       from: address,
       value: price,
     });
+    return true;
   } catch (e: unknown) {
     // @ts-expect-error
     const errorString = e.hasOwnProperty("message")
@@ -39,6 +40,7 @@ export async function mintNFTs(tokenUris: Array<string>): Promise<void> {
         e.message
       : "Mint failed due to unknown error.";
     alert(errorString);
+    return false;
   }
 }
 
