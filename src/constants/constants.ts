@@ -22,8 +22,18 @@ export const ACTIVITIES_PAGE_ROUTE = "/activities";
 export const QUESTIONS_PAGE_ROUTE = "/#questions";
 export const ABOUT_PAGE_ROUTE = "/#about";
 export const MINT_PAGE_ROUTE = "/mint";
+export const MINTED_ACTIVITIES_ROUTE = "/minted";
 
 export const PIN_FILE_TO_IPFS_API = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 export const PIN_JSON_TO_IPFS_API = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
 export const MINT_PRICE_WEI = 5000000000000000;
+
+export const ROPSTEN_CONTRACT_ADDRESS =
+  "0xee9BC9da1D539c9904EbA16c6C4200C82A734739";
+export const RINKEBY_CONTRACT_ADDRESS =
+  "0x0661824C07CaA34E8610fe3ef9598EA6eb280779";
+export const OPTIMISM_KOVAN_CONTRACT_ADDRESS =
+  "0xee9BC9da1D539c9904EbA16c6C4200C82A734739";
+export const OPTIMISM_CONTRACT_ADDRESS =
+  "0xC7adDfaf516751e1b3C068B763bcA13dDc5499F9";

@@ -1,9 +1,10 @@
 import { Grid } from "@mui/material";
 import { useLocation } from "react-router";
 import { Map } from "leaflet";
+import { useState } from "react";
 
 import { Activity, ActivityData } from "../constants/models";
-import { NAVY_BLUE, OFF_WHITE } from "../constants/styles";
+import { NAVY_BLUE, OFF_WHITE, SLATE_GRAY } from "../constants/styles";
 import { Button } from "../components/base/Button";
 import { useToggleMeasurement } from "../hooks/useToggleMeasurement";
 import { mintNFTs } from "../utils/mint";
@@ -19,6 +20,7 @@ export default function MintPage(): JSX.Element {
     useToggleMeasurement(initialMeasurementSystem);
   const [activitiesData, removeActivityById, addMapById, updateActivityById] =
     UseUpdateActivitiesData(activities);
+  const [isMinting, setIsMinting] = useState(false);
 
   const hasFullyLoadedMaps = activitiesData.every((data) => data.map != null);
   return (
@@ -37,11 +39,12 @@ export default function MintPage(): JSX.Element {
             variant="contained"
             style={{
               height: "36px",
-              backgroundColor: NAVY_BLUE,
+              backgroundColor: isMinting ? SLATE_GRAY : NAVY_BLUE,
               color: OFF_WHITE,
             }}
-            disabled={!hasFullyLoadedMaps}
+            disabled={!hasFullyLoadedMaps || isMinting}
             onClick={async () => {
+              setIsMinting(true);
               if (hasFullyLoadedMaps) {
                 const tokenUris = await uploadActivityDataToIPFS(
                   activitiesData,
@@ -50,11 +53,10 @@ export default function MintPage(): JSX.Element {
                 );
                 await mintNFTs(tokenUris);
               }
-              // await startMintFlow();
-              // await requestAccount();
+              setIsMinting(false);
             }}
           >
-            Mint activities
+            {isMinting ? "Minting in progress..." : "Mint activities"}
           </Button>
         </Grid>
         <Grid container spacing={1}>
