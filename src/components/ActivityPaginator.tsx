@@ -28,7 +28,6 @@ export default function ActivityPaginator(
   props: ActivityPaginatorProps
 ): JSX.Element {
   // TODO: Consider batch fetching with client-side pagination
-
   const {
     user,
     measurementSystem,

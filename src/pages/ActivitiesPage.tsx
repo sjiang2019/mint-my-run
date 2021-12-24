@@ -95,7 +95,7 @@ const ActivitiesPage = ({ user }: UserRoutesProps) => {
                 margin: 0,
                 bottom: "auto",
                 right: 40,
-                top: 60,
+                top: 80,
                 left: "auto",
                 position: "fixed",
                 textTransform: "none",
