@@ -24,7 +24,7 @@ export default function MintedActivitiesPage(): JSX.Element {
     <>
       <NavBar />
       <Grid container justifyContent="center">
-        <Grid container spacing={4} sx={{ marginTop: "40px", width: "90%" }}>
+        <Grid container spacing={1} sx={{ marginTop: "40px", width: "90%" }}>
           {nftMetadataList != null && tokenURIs != null ? (
             nftMetadataList.length > 0 ? (
               nftMetadataList.map((metadata: ActivityMetadata, i: number) => (

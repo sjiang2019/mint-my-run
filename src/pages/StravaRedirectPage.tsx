@@ -8,6 +8,7 @@ import { cleanAuthToken, authGetter } from "../utils/auth";
 import { NavBar } from "../components/base/NavBar";
 import { parseUserData } from "../utils/parse";
 import { GreekingLoading } from "../components/base/GreekingLoading";
+import { ACTIVITIES_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/constants";
 
 export function StravaRedirectPage(props: any): JSX.Element {
   let location = useLocation();
@@ -17,7 +18,7 @@ export function StravaRedirectPage(props: any): JSX.Element {
     const authenticate = async () => {
       try {
         if (_.isEmpty(location)) {
-          return navigate("/");
+          return navigate(HOME_PAGE_ROUTE);
         }
         const stravaAuthToken = cleanAuthToken(location.search);
         const tokens = await authGetter(stravaAuthToken);
@@ -26,9 +27,9 @@ export function StravaRedirectPage(props: any): JSX.Element {
         const user = parseUserData(tokens);
         props.setUser(user);
 
-        navigate("/activities");
+        navigate(ACTIVITIES_PAGE_ROUTE);
       } catch (error) {
-        navigate("/");
+        navigate(HOME_PAGE_ROUTE);
       }
     };
     authenticate();

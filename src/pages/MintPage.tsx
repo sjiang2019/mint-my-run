@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Map } from "leaflet";
 import { useState } from "react";
 
@@ -18,8 +18,10 @@ import {
 } from "../utils/ipfs";
 import { makeActivityMetadata } from "../utils/parse";
 import { makeIPFSUrl } from "../utils/utils";
+import { MINTED_ACTIVITIES_ROUTE } from "../constants/constants";
 
 export default function MintPage(): JSX.Element {
+  const navigate = useNavigate();
   const { activities, initialMeasurementSystem } = useLocation().state;
   const [measurementSystem, onChangeMeasureSystem, makeReadableActivity] =
     useToggleMeasurement(initialMeasurementSystem);
@@ -47,6 +49,8 @@ export default function MintPage(): JSX.Element {
             await unpinFileToIPFS(ipfsHash.jsonHash);
           })
         );
+      } else {
+        navigate(MINTED_ACTIVITIES_ROUTE);
       }
     }
     setIsMinting(false);
