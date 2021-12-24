@@ -1,6 +1,6 @@
 import { StyleSheet, css } from "aphrodite";
 import { HashLink as Link } from "react-router-hash-link";
-import { Icon, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 import { Button } from "./Button";
 import { NAVY_BLUE, OFF_WHITE } from "../../constants/styles";

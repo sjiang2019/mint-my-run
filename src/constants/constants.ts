@@ -5,7 +5,8 @@ export const {
   REACT_APP_PINATA_API_SECRET,
   REACT_APP_ETHERSCAN_API_TOKEN,
 } = process.env;
-const REDIRECT_URL = "http://localhost:3000/redirect";
+const REDIRECT_URL = `${window.location.origin}/redirect`;
+console.log(REDIRECT_URL);
 const SCOPES = "read,activity:read";
 export const STRAVA_AUTH_URL = `http://www.strava.com/oauth/authorize?client_id=${REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URL}/exchange_token&approval_prompt=force&scope=${SCOPES}`;
 

@@ -26,6 +26,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
+    "deploy": "surge build mintmyrun.xyz",
     "start": "react-scripts start",
     "build": "react-scripts build && cp build/index.html build/200.html",
     "test": "react-scripts test",

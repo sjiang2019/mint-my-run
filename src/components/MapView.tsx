@@ -6,7 +6,7 @@ import {
   Map,
   PointExpression,
 } from "leaflet";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 
 import { STRAVA_ORANGE } from "../constants/styles";
@@ -42,15 +42,17 @@ export default function MapView(props: MapViewProps): JSX.Element {
           borderRadius: "6px",
           marginTop: "16px",
         }}
-        zoom={13}
+        zoom={14}
         scrollWheelZoom={false}
         bounds={bounds}
         boundsOptions={{ padding: [20, 20] as PointExpression }}
         whenCreated={props.onCreateMap}
       >
         <TileLayer
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          // Watercolor map view option
+          // url="http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+          url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <Polyline
           pathOptions={{ color: STRAVA_ORANGE }}

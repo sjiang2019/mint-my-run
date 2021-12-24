@@ -62,7 +62,7 @@ export default function MintActivityListItem(
     onChangeActivityData,
     onRemove,
   } = props;
-  const { activity, ...rest } = activityData;
+  const { activity } = activityData;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleSaveModal = (name: string, description: string) => {
     onChangeActivityData({ ...activity, name, description });

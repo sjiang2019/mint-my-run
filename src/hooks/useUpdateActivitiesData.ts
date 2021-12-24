@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Map } from "leaflet";
 
-import { Activity, ActivityData, ActivityMetadata } from "../constants/models";
+import { Activity, ActivityData } from "../constants/models";
 
 export function UseUpdateActivitiesData(
   activities: Set<Activity>

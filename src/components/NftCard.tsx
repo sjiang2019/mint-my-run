@@ -50,8 +50,8 @@ export default function NftCard(props: NftCardProps) {
     <Grid container justifyContent="center">
       <Card
         sx={{
-          maxWidth: 345,
           backgroundColor: SEA_GREEN,
+          width: "471px",
         }}
       >
         <CardHeader sx={{ color: OFF_WHITE }} title={props.nftMetadata.name} />

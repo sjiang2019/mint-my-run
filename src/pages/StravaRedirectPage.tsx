@@ -22,7 +22,6 @@ export function StravaRedirectPage(props: any): JSX.Element {
         }
         const stravaAuthToken = cleanAuthToken(location.search);
         const tokens = await authGetter(stravaAuthToken);
-        console.log("tokens", tokens);
 
         const user = parseUserData(tokens);
         props.setUser(user);
