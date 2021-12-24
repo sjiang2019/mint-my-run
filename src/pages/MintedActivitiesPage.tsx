@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { GreekingLoading } from "../components/base/GreekingLoading";
 
@@ -25,19 +25,26 @@ export default function MintedActivitiesPage(): JSX.Element {
       <NavBar />
       <Grid container justifyContent="center">
         <Grid container spacing={4} sx={{ marginTop: "40px", width: "90%" }}>
-          {nftMetadataList && tokenURIs ? (
-            nftMetadataList.map((metadata: ActivityMetadata, i: number) => (
-              <Grid
-                item
-                xs={12}
-                md={6}
-                xl={3}
-                key={`${metadata.name}_${i}`}
-                style={{ paddingTop: 3 }}
-              >
-                <NftCard nftMetadata={metadata} tokenURI={tokenURIs[i]} />
-              </Grid>
-            ))
+          {nftMetadataList != null && tokenURIs != null ? (
+            nftMetadataList.length > 0 ? (
+              nftMetadataList.map((metadata: ActivityMetadata, i: number) => (
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  xl={3}
+                  key={`${metadata.name}_${i}`}
+                  style={{ paddingTop: 3 }}
+                >
+                  <NftCard nftMetadata={metadata} tokenURI={tokenURIs[i]} />
+                </Grid>
+              ))
+            ) : (
+              <Typography>
+                No minted activities found. Make sure your Metamask account is
+                connected to the Optimism network.
+              </Typography>
+            )
           ) : (
             <GreekingLoading />
           )}

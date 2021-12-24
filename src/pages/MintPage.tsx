@@ -11,8 +11,13 @@ import { mintNFTs } from "../utils/mint";
 import MintActivityListItem from "../components/MintActivityListItem";
 import MeasurementToggle from "../components/base/MeasurementToggle";
 import { UseUpdateActivitiesData } from "../hooks/useUpdateActivitiesData";
-import { uploadActivityDataToIPFS } from "../utils/ipfs";
+import {
+  uploadActivityDataToIPFS,
+  IPFSHash,
+  unpinFileToIPFS,
+} from "../utils/ipfs";
 import { makeActivityMetadata } from "../utils/parse";
+import { makeIPFSUrl } from "../utils/utils";
 
 export default function MintPage(): JSX.Element {
   const { activities, initialMeasurementSystem } = useLocation().state;
@@ -23,6 +28,30 @@ export default function MintPage(): JSX.Element {
   const [isMinting, setIsMinting] = useState(false);
 
   const hasFullyLoadedMaps = activitiesData.every((data) => data.map != null);
+  const handleClickMint = async () => {
+    setIsMinting(true);
+    if (hasFullyLoadedMaps) {
+      const ipfsHashes = await uploadActivityDataToIPFS(
+        activitiesData,
+        (activity: Activity) =>
+          makeActivityMetadata(makeReadableActivity(activity))
+      );
+      const tokenUris = ipfsHashes.map((ipfsHash: IPFSHash) =>
+        makeIPFSUrl(ipfsHash.jsonHash)
+      );
+      const didMint = await mintNFTs(tokenUris);
+      if (!didMint) {
+        await Promise.all(
+          ipfsHashes.map(async (ipfsHash: IPFSHash) => {
+            await unpinFileToIPFS(ipfsHash.fileHash);
+            await unpinFileToIPFS(ipfsHash.jsonHash);
+          })
+        );
+      }
+    }
+    setIsMinting(false);
+  };
+
   return (
     <Grid container justifyContent="center">
       <Grid container style={{ marginTop: "36px", width: "80%" }}>
@@ -43,18 +72,7 @@ export default function MintPage(): JSX.Element {
               color: OFF_WHITE,
             }}
             disabled={!hasFullyLoadedMaps || isMinting}
-            onClick={async () => {
-              setIsMinting(true);
-              if (hasFullyLoadedMaps) {
-                const tokenUris = await uploadActivityDataToIPFS(
-                  activitiesData,
-                  (activity: Activity) =>
-                    makeActivityMetadata(makeReadableActivity(activity))
-                );
-                await mintNFTs(tokenUris);
-              }
-              setIsMinting(false);
-            }}
+            onClick={handleClickMint}
           >
             {isMinting ? "Minting in progress..." : "Mint activities"}
           </Button>
