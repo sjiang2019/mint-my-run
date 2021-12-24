@@ -17,9 +17,9 @@ export interface Activity {
 }
 
 export interface MetadataAttribute {
-  display_type: string;
   trait_type: string;
   value: string | number;
+  display_type?: "number" | "date";
 }
 
 export interface ActivityMetadata {

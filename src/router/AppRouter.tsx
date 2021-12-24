@@ -7,10 +7,12 @@ import ActivitiesPage from "../pages/ActivitiesPage";
 import {
   ACTIVITIES_PAGE_ROUTE,
   HOME_PAGE_ROUTE,
+  MINTED_ACTIVITIES_ROUTE,
   MINT_PAGE_ROUTE,
   STRAVA_REDIRECT_PAGE_ROUTE,
 } from "../constants/constants";
 import MintPage from "../pages/MintPage";
+import MintedActivitiesPage from "../pages/MintedActivitiesPage";
 
 class AppRouter extends React.Component {
   render() {
@@ -25,6 +27,10 @@ class AppRouter extends React.Component {
             />
             <Route path={ACTIVITIES_PAGE_ROUTE} element={<ActivitiesPage />} />
             <Route path={MINT_PAGE_ROUTE} element={<MintPage />} />
+            <Route
+              path={MINTED_ACTIVITIES_ROUTE}
+              element={<MintedActivitiesPage />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
