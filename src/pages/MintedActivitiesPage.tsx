@@ -42,7 +42,7 @@ export default function MintedActivitiesPage(): JSX.Element {
             ) : (
               <Typography>
                 No minted activities found. Make sure your Metamask account is
-                connected to the Optimism network.
+                connected to the Optimism network and refresh the page.
               </Typography>
             )
           ) : (

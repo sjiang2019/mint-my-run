@@ -5,7 +5,7 @@ import { OFF_WHITE, SEA_GREEN } from "../constants/styles";
 export default function QuestionsPage() {
   return (
     <Grid
-      id="about"
+      id="questions"
       container
       justifyContent="center"
       sx={{ height: "800px", backgroundColor: SEA_GREEN }}
@@ -19,16 +19,25 @@ export default function QuestionsPage() {
         <Typography variant="h3" fontFamily="monospace">
           FAQ
         </Typography>
-        <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
+        <Typography
+          variant="body1"
+          fontFamily="monospace"
+          fontWeight="bold"
+          paddingTop={2}
+        >
           Why is MintMyRun deployed on the Optimism network instead of Ethereum
           Mainnet?
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={1}>
-          {`>`} The gas cost of minting an NFT on mainnet would far exceed the
-          price of the NFT itself (0.005Ξ). Also, it's really expensive to
-          deploy a contract on Mainnet.
+          {`>`} Gas is really expensive on mainnet. The gas cost to mint an NFT
+          on mainnet would exceed the price of the NFT itself (0.005Ξ).
         </Typography>
-        <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
+        <Typography
+          variant="body1"
+          fontWeight="bold"
+          fontFamily="monospace"
+          paddingTop={2}
+        >
           How do I add the Optimism network to my MetaMask?
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={1}>
@@ -52,7 +61,12 @@ export default function QuestionsPage() {
             https://community.optimism.io/docs/infra/networks.html#optimism-mainnet
           </a>
         </Typography>
-        <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
+        <Typography
+          variant="body1"
+          fontWeight="bold"
+          fontFamily="monospace"
+          paddingTop={2}
+        >
           How do I transfer Eth to Optimism?
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={1}>
@@ -67,7 +81,12 @@ export default function QuestionsPage() {
             https://gateway.optimism.io/
           </a>
         </Typography>
-        <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
+        <Typography
+          variant="body1"
+          fontWeight="bold"
+          fontFamily="monospace"
+          paddingTop={2}
+        >
           Why aren't my minted activities showing up in the "My NFTs" tab?
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={1}>
