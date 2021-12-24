@@ -3,6 +3,7 @@ export const {
   REACT_APP_CLIENT_SECRET,
   REACT_APP_PINATA_API_KEY,
   REACT_APP_PINATA_API_SECRET,
+  REACT_APP_ETHERSCAN_API_TOKEN,
 } = process.env;
 const REDIRECT_URL = "http://localhost:3000/redirect";
 const SCOPES = "read,activity:read";
