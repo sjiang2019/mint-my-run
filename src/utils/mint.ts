@@ -13,6 +13,18 @@ export async function mintNFTs(tokenUris: Array<string>): Promise<boolean> {
   try {
     // @ts-expect-error
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    const network = await provider.getNetwork();
+    const chainId = network.chainId;
+    if (chainId !== 10) {
+      await provider.send("wallet_addEthereumChain", [
+        {
+          chainId: "0xa",
+          rpcUrls: ["https://mainnet.optimism.io"],
+          chainName: "Optimism",
+          blockExplorerUrls: ["https://optimistic.etherscan.io"],
+        },
+      ]);
+    }
     // Prompt user for account connections
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
@@ -48,6 +60,18 @@ export async function fetchTokenURIs(): Promise<Array<string>> {
   try {
     // @ts-expect-error
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    const network = await provider.getNetwork();
+    const chainId = network.chainId;
+    if (chainId !== 10) {
+      await provider.send("wallet_addEthereumChain", [
+        {
+          chainId: "0xa",
+          rpcUrls: ["https://mainnet.optimism.io"],
+          chainName: "Optimism",
+          blockExplorerUrls: ["https://optimistic.etherscan.io"],
+        },
+      ]);
+    }
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(

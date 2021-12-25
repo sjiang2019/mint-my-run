@@ -43,6 +43,7 @@ export default function MintPage(): JSX.Element {
       );
       const didMint = await mintNFTs(tokenUris);
       if (!didMint) {
+        setIsMinting(false);
         await Promise.all(
           ipfsHashes.map(async (ipfsHash: IPFSHash) => {
             await unpinFileToIPFS(ipfsHash.fileHash);
