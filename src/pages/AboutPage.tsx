@@ -9,7 +9,7 @@ export default function AboutPage() {
       id="about"
       container
       justifyContent="center"
-      sx={{ height: "800px", backgroundColor: OFF_WHITE }}
+      sx={{ backgroundColor: OFF_WHITE }}
     >
       <Grid
         container
@@ -22,40 +22,37 @@ export default function AboutPage() {
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
           <strong>MintMyRun</strong> is a passion project. It has no roadmap,
-          airdrop, or utility. It was born simply out of a desire to memorialize
-          athletic achievements on the blockchain.
+          airdrop, or utility.
         </Typography>
+        <Typography
+          variant="body1"
+          fontFamily="monospace"
+          paddingTop={2}
+        ></Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          Each activity costs <strong>0.005Ξ</strong> to mint and there's no cap
-          on the total supply of MintMyRun (MMR) tokens.
-        </Typography>
-        <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          To view your minted activities, click the "My NFTs" tab in the
-          navigation bar.
+          To view your minted activities, click the <strong>My NFTs</strong> tab
+          in the navigation bar.
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={4}>
           To mint new activities:
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          1. Ensure that your MetaMask account is connected to the{" "}
-          <strong>Optimism</strong> network (see FAQ section for more details).
-        </Typography>
-        <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          2. Click the orange "Connect with Strava" button above. Make sure you
+          1. Click the orange "Connect with Strava" button above. Make sure you
           allow MintMyRun to view your public activities.
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          3. Select activities to preview as NFTs and click "View activities"
-          button to proceed to minting page.
+          2. Select activities to mint as NFTs.
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          4. Preview your activity metadata before minting. You can drag the map
-          to change the image, update the "name" and "description" metadata
-          fields, and change the system of measurement.
+          3. Preview your NFT image and metadata before minting. You can drag
+          the map to change the image, edit the "name" and "description"
+          metadata fields, and change the system of measurement.
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
-          5. Click the "Mint activities" button and accept the transaction in
-          MetaMask.
+          4. Ensure that your MetaMask account is connected to the{" "}
+          <strong>Optimism</strong> network. Click the "Mint activities" button
+          and accept the transaction in MetaMask. Each activity costs{" "}
+          <strong>0.005Ξ</strong> to mint.
         </Typography>
       </Grid>
     </Grid>

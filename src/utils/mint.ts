@@ -62,6 +62,7 @@ export async function fetchTokenURIs(): Promise<Array<string>> {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     const network = await provider.getNetwork();
     const chainId = network.chainId;
+    console.log("Chain ID:", chainId);
     if (chainId !== 10) {
       await provider.send("wallet_addEthereumChain", [
         {

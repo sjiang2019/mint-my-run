@@ -21,8 +21,6 @@ export const DEFAULT_LOTTIE_OPTIONS = {
 export const HOME_PAGE_ROUTE = "/";
 export const STRAVA_REDIRECT_PAGE_ROUTE = "/redirect/*";
 export const ACTIVITIES_PAGE_ROUTE = "/activities";
-export const QUESTIONS_PAGE_ROUTE = "/#questions";
-export const ABOUT_PAGE_ROUTE = "/#about";
 export const MINT_PAGE_ROUTE = "/mint";
 export const MINTED_ACTIVITIES_ROUTE = "/minted";
 

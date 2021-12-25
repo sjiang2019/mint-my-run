@@ -5,10 +5,8 @@ import { IconButton } from "@mui/material";
 import { Button } from "./Button";
 import { NAVY_BLUE, OFF_WHITE } from "../../constants/styles";
 import {
-  ABOUT_PAGE_ROUTE,
   HOME_PAGE_ROUTE,
   MINTED_ACTIVITIES_ROUTE,
-  QUESTIONS_PAGE_ROUTE,
 } from "../../constants/constants";
 import etherscanLogo from "../../assets/etherscan-logo.svg";
 
@@ -18,16 +16,6 @@ export function NavBar(): JSX.Element {
       <Link to={HOME_PAGE_ROUTE} style={{ textDecoration: "none" }}>
         <Button variant="text" className={css(styles.button)} disableRipple>
           Home
-        </Button>
-      </Link>
-      <Link to={ABOUT_PAGE_ROUTE} style={{ textDecoration: "none" }}>
-        <Button variant="text" className={css(styles.button)} disableRipple>
-          About
-        </Button>
-      </Link>
-      <Link to={QUESTIONS_PAGE_ROUTE} style={{ textDecoration: "none" }}>
-        <Button variant="text" className={css(styles.button)} disableRipple>
-          FAQ
         </Button>
       </Link>
       <Link to={MINTED_ACTIVITIES_ROUTE} style={{ textDecoration: "none" }}>

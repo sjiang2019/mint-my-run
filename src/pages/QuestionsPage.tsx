@@ -8,7 +8,7 @@ export default function QuestionsPage() {
       id="questions"
       container
       justifyContent="center"
-      sx={{ height: "800px", backgroundColor: SEA_GREEN }}
+      sx={{ backgroundColor: SEA_GREEN }}
     >
       <Grid
         container
