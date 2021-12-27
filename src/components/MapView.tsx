@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import {
   LatLngBounds,
   latLngBounds,
@@ -6,7 +7,6 @@ import {
   Map,
   PointExpression,
 } from "leaflet";
-import { useMemo } from "react";
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 
 import { STRAVA_ORANGE } from "../constants/styles";
@@ -14,7 +14,7 @@ import { STRAVA_ORANGE } from "../constants/styles";
 var polyUtil = require("polyline-encoded");
 
 interface MapViewProps {
-  polyline: string;
+  polyline?: string;
   onCreateMap?: (map: Map) => void;
 }
 
@@ -27,10 +27,12 @@ function createMapBounds(polyline: Array<LatLngTuple>): LatLngBounds {
 }
 
 export default function MapView(props: MapViewProps): JSX.Element {
+  if (props.polyline == null) {
+    return <Typography> No map available. </Typography>;
+  }
+
   var decodedPolyline = polyUtil.decode(props.polyline);
-  const bounds = useMemo(() => {
-    return createMapBounds(decodedPolyline);
-  }, [decodedPolyline]);
+  const bounds = createMapBounds(decodedPolyline);
 
   return (
     <>
