@@ -1,9 +1,10 @@
 import { StyleSheet, css } from "aphrodite";
 import { HashLink as Link } from "react-router-hash-link";
 import { IconButton } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 import { Button } from "./Button";
-import { NAVY_BLUE, OFF_WHITE } from "../../constants/styles";
+import { NAVY_BLUE, OFF_WHITE, WHITE } from "../../constants/styles";
 import {
   HOME_PAGE_ROUTE,
   MINTED_ACTIVITIES_ROUTE,
@@ -35,10 +36,19 @@ export function NavBar(): JSX.Element {
         <img
           style={{
             height: "32px",
+            paddingTop: "3px",
           }}
           src={etherscanLogo}
           alt=""
         />
+      </IconButton>
+      <IconButton
+        onClick={() => {
+          window.open("https://github.com/sjiang2019/mint-my-run", "_blank");
+        }}
+        sx={{ float: "right" }}
+      >
+        <GitHubIcon sx={{ color: WHITE }} fontSize="large" />
       </IconButton>
     </div>
   );

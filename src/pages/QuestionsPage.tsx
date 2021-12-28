@@ -87,11 +87,21 @@ export default function QuestionsPage() {
           fontFamily="monospace"
           paddingTop={4}
         >
-          Why aren't my minted activities showing up in the "My NFTs" tab?
+          How can I view my minted activities?
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={1}>
-          {`>`} Make sure that your MetaMask account is switched to the Optimism
-          network.
+          {`>`} You can view them in the "My NFTs" tab (make sure that your
+          MetaMask account is switched to the Optimism network). You can also
+          view them on{" "}
+          <a
+            href="https://quixotic.io/"
+            rel="noreferrer"
+            target="_blank"
+            style={{ color: "inherit" }}
+          >
+            Quixotic
+          </a>
+          .
         </Typography>
       </Grid>
     </Grid>

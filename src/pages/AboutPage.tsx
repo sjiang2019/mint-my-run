@@ -31,7 +31,16 @@ export default function AboutPage() {
         ></Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={2}>
           To view your minted activities, click the <strong>My NFTs</strong> tab
-          in the navigation bar.
+          in the navigation bar. You can also view them on{" "}
+          <a
+            href="https://quixotic.io/"
+            rel="noreferrer"
+            target="_blank"
+            style={{ color: "inherit" }}
+          >
+            Quixotic
+          </a>
+          .
         </Typography>
         <Typography variant="body1" fontFamily="monospace" paddingTop={4}>
           To mint new activities:
